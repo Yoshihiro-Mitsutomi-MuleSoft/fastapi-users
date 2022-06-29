@@ -55,15 +55,15 @@ for wkE in dummyData:
     dummyDic = json.loads(ini_string)
     json_list.append(dummyDic)
 
-@app.get("/")
+@app.get("/v1")
 async def root():
     return {"message": "Hello World"}
 
-@app.get("/users")
+@app.get("/v1/users")
 async def usersList():
     return dummyData
 
-@app.get("/users/{user_id}")
+@app.get("/v1/users/{user_id}")
 async def userSingle(user_id: int):
 
     retStr = {"id": user_id, "email": "", "first_name": "", "last_name": "", "avatar": ""}
