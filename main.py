@@ -1,8 +1,8 @@
 import json
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 import uvicorn
 
-app = FastAPI()
+app = FastAPI(root_path="/api/v1")
 
 dummyData = [
         {
@@ -55,15 +55,15 @@ for wkE in dummyData:
     dummyDic = json.loads(ini_string)
     json_list.append(dummyDic)
 
-@app.get("/v1")
-async def root():
+@app.get("/")
+async def root(request: Request):
     return {"message": "Hello World"}
 
-@app.get("/v1/users")
+@app.get("/users")
 async def usersList():
     return dummyData
 
-@app.get("/v1/users/{user_id}")
+@app.get("/users/{user_id}")
 async def userSingle(user_id: int):
 
     retStr = {"id": user_id, "email": "", "first_name": "", "last_name": "", "avatar": ""}
